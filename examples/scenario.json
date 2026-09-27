@@ -1,0 +1,9 @@
+{
+  "initial": {"a": {"text": "current", "tags": ["status:active"]}},
+  "operations": [
+    {"op": "update", "id": "a", "text": "current and verified"},
+    {"op": "invalid_delta", "id": "a"},
+    {"op": "put", "id": "b", "text": "temporary", "tags": ["status:draft"]},
+    {"op": "delete", "id": "b"}
+  ]
+}
