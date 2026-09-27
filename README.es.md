@@ -25,6 +25,17 @@ Python 3.11+; no external package required. / Python 3.11+ ; aucune dépendance 
 
 El contrato compara cada estado devuelto por un adaptador externo con un oráculo sencillo. Configure `adapter_command` en el escenario JSON. El adaptador incluido es sintético; todavía no se incluye un adaptador para Hindsight.
 
+## Demo relacionada con Hindsight
+
+Los archivos `hindsight-observations*.json` modelan las transiciones descritas en [Hindsight #4831](https://github.com/vectorize-io/hindsight/issues/4831) y [#4829](https://github.com/vectorize-io/hindsight/issues/4829). El verificador también acepta observaciones JSON capturadas por separado:
+
+```bash
+python3 tool.py observation-demo
+python3 tool.py check-observations examples/hindsight-observations.json
+```
+
+El segundo comando falla intencionadamente con las transiciones comunicadas. Son ejemplos sintéticos basados en los informes; no constituyen una reproducción independiente en Hindsight y no se llama a ningún servidor Hindsight.
+
 ## Pruebas
 
 ```bash

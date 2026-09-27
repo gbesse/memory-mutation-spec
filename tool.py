@@ -50,9 +50,40 @@ def check(scenario):
     return {'ok': not findings, 'operations': len(expected), 'findings': findings}
 
 
+def check_observations(data):
+    """Check captured transitions without claiming to execute Hindsight itself."""
+    findings = []
+    for index, event in enumerate(data['events'], 1):
+        kind = event['kind']
+        if kind == 'consolidation_update':
+            before = set(event['before_tags'])
+            after = set(event['after_tags'])
+            allowed = set(event.get('explicitly_removed_tags', []))
+            lost = sorted(before - after - allowed)
+            if lost:
+                findings.append(f'event {index}: tags lost without explicit removal: {lost}')
+        elif kind == 'delta_refresh':
+            skipped = event['operations_skipped']
+            if skipped and event['outcome'] == 'content_written' and event['is_stale'] is False:
+                findings.append(f'event {index}: {len(skipped)} skipped delta operation(s) reported as clean refresh')
+        else:
+            raise ValueError(f'event {index}: unsupported kind {kind}')
+    return {'ok': not findings, 'events': len(data['events']), 'findings': findings}
+
+
 def main():
     if len(sys.argv) < 2:
-        raise SystemExit('usage: tool.py demo | check SCENARIO.json')
+        raise SystemExit('usage: tool.py demo | check SCENARIO.json | observation-demo | check-observations FILE.json')
+    if sys.argv[1] in ('observation-demo', 'check-observations'):
+        base = Path(__file__).parent / 'examples'
+        if sys.argv[1] == 'observation-demo':
+            bad = check_observations(json.loads((base / 'hindsight-observations.json').read_text()))
+            good = check_observations(json.loads((base / 'hindsight-observations-fixed.json').read_text()))
+            print(json.dumps({'reported_transitions': bad, 'fixed_transitions': good}, indent=2))
+            return 0 if not bad['ok'] and good['ok'] else 1
+        result = check_observations(json.loads(Path(sys.argv[2]).read_text()))
+        print(json.dumps(result, indent=2))
+        return 0 if result['ok'] else 1
     scenario = json.loads((Path(__file__).parent / 'examples/scenario.json').read_text()) if sys.argv[1] == 'demo' else json.loads(Path(sys.argv[2]).read_text())
     if sys.argv[1] not in ('demo', 'check'):
         raise SystemExit('unknown command')

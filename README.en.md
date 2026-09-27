@@ -25,6 +25,17 @@ Python 3.11+; no external package required. / Python 3.11+ ; aucune dépendance 
 
 The contract compares each state returned by an external adapter with a simple oracle. Set `adapter_command` in the JSON scenario. The bundled adapter is synthetic; a Hindsight adapter is not provided yet.
 
+## Hindsight-related demo
+
+The `hindsight-observations*.json` files model transitions reported in [Hindsight #4831](https://github.com/vectorize-io/hindsight/issues/4831) and [#4829](https://github.com/vectorize-io/hindsight/issues/4829). The checker also accepts separately captured JSON observations:
+
+```bash
+python3 tool.py observation-demo
+python3 tool.py check-observations examples/hindsight-observations.json
+```
+
+The second command intentionally fails on the reported transitions. These are synthetic fixtures derived from the reports; they are not an independent Hindsight reproduction, and no Hindsight server is called.
+
 ## Tests
 
 ```bash

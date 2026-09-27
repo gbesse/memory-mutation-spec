@@ -1,0 +1,15 @@
+{
+  "events": [
+    {
+      "kind": "consolidation_update",
+      "before_tags": ["knowledge:decision", "status:active", "parent:1", "session:1"],
+      "after_tags": ["knowledge:decision", "status:active", "parent:1", "session:1"]
+    },
+    {
+      "kind": "delta_refresh",
+      "operations_skipped": [{"op": "replace_block", "reason": "unknown block_id"}],
+      "outcome": "content_written_partial",
+      "is_stale": true
+    }
+  ]
+}
