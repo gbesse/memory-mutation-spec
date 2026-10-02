@@ -36,6 +36,10 @@ python3 tool.py check-observations examples/hindsight-observations.json
 
 El segundo comando falla intencionadamente con las transiciones comunicadas. Son ejemplos sintéticos basados en los informes; no constituyen una reproducción independiente en Hindsight y no se llama a ningún servidor Hindsight.
 
+## Ejemplo: eliminación explícita
+
+`python3 -m examples.explicit_removal` compara una eliminación de etiqueta declarada con la pérdida silenciosa de la misma etiqueta. Solo la primera cumple el invariante. Las transiciones son sintéticas; no se llama a ningún servicio de memoria.
+
 ## Pruebas
 
 ```bash
