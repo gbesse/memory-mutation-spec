@@ -36,6 +36,10 @@ python3 tool.py check-observations examples/hindsight-observations.json
 
 La seconde commande échoue volontairement sur les transitions signalées. Ces données sont des fixtures synthétiques dérivées des rapports ; elles ne prouvent pas une reproduction sur Hindsight, et aucun serveur Hindsight n’est appelé.
 
+## Exemple : suppression explicite
+
+`python3 -m examples.explicit_removal` compare une suppression de tag déclarée à une perte silencieuse du même tag. Seule la première respecte l’invariant. Les transitions sont synthétiques ; aucun service de mémoire n’est appelé.
+
 ## Tests
 
 ```bash
