@@ -1,5 +1,11 @@
 # memory-mutation-spec
 
+## Nuevo: comprobar el envío del alcance compartido
+
+`python3 scope_audit.py scope-demo --lang es` muestra en diez segundos que se solicita `shared` pero no se transmite (la demo correcta sale con código 0). Con JSON guardado: `python3 scope_audit.py check scope.json --lang es`. Proporcione `requested_scope: "shared"`, `forwarded_scope` (`"shared"`, `[[]]` o `null`) y opcionalmente `observations` con `scope_key` y `session_id`. Verifica la transmisión declarada; las observaciones fragmentadas por sí solas no prueban la causa. Todavía no incluye un analizador de logs Hermes.
+
+**Proyectos relacionados:** [Hindsight #5305](https://github.com/vectorize-io/hindsight/issues/5305) y [#5309](https://github.com/vectorize-io/hindsight/issues/5309) motivan comparar el alcance solicitado con la configuración transmitida. Son pruebas del problema, no integraciones.
+
 Comprueba invariantes tras cada mutación de memoria de agentes.
 
 [Français](README.md) · [English](README.en.md) · [Español](README.es.md)

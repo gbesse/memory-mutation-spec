@@ -1,5 +1,11 @@
 # memory-mutation-spec
 
+## New: check shared scope forwarding
+
+`python3 scope_audit.py scope-demo --lang en` shows requested `shared` scope not forwarded in ten seconds (successful demo exits 0). For saved JSON run `python3 scope_audit.py check scope.json --lang en`. Supply `requested_scope: "shared"`, `forwarded_scope` (`"shared"`, `[[]]` or `null`) and optional `observations` with `scope_key` and `session_id`. It checks the declared forwarding; fragmented observations alone do not prove the cause. There is no Hermes log parser yet.
+
+**Related projects:** [Hindsight #5305](https://github.com/vectorize-io/hindsight/issues/5305) and [#5309](https://github.com/vectorize-io/hindsight/issues/5309) motivate checking requested scope against forwarded configuration. These issues are evidence, not integrations.
+
 Checks invariants after each agent-memory mutation.
 
 [Français](README.md) · [English](README.en.md) · [Español](README.es.md)

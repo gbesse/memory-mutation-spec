@@ -1,5 +1,11 @@
 # memory-mutation-spec
 
+## Nouveau : vérifier la portée partagée
+
+`python3 scope_audit.py scope-demo --lang fr` montre en dix secondes une portée `shared` demandée mais non transmise (démo réussie : code 0). Avec une capture JSON : `python3 scope_audit.py check scope.json --lang fr`. Fournissez `requested_scope: "shared"`, `forwarded_scope` (`"shared"`, `[[]]` ou `null`) et, si disponibles, des `observations` avec `scope_key` et `session_id`. L’outil vérifie la transmission déclarée ; plusieurs groupes observés seuls ne prouvent pas la cause. Aucun parseur de logs Hermes n’est inclus.
+
+**Projets voisins :** [Hindsight #5305](https://github.com/vectorize-io/hindsight/issues/5305) et [#5309](https://github.com/vectorize-io/hindsight/issues/5309) motivent l’audit de la portée demandée face à la configuration transmise. Ces issues sont des sources de problème, pas des intégrations.
+
 Vérifie les invariants après chaque mutation d’une mémoire d’agent.
 
 [Français](README.md) · [English](README.en.md) · [Español](README.es.md)
